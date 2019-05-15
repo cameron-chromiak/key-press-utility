@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
+  <title>Key Press</title>
+</head>
+
+<body>
+
+<button type="button" id='table-toggle'>Table</button>
+<div class="table-flex-container">
+  <div class="table-container">
+    <table id='key-table'>
+      <tr>Key Code: </tr>
+      <tr>Key</tr>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="main">
+  <div id="num-div" class="lg-text"><h1 id='event-which'><div class="directions">Press a key</div></h1></div>
+
+  <div id="flex-container">
+    <div class="card">
+      <div class="box-label">event.key</div>
+        <div id='event-key' class="med-text sm-box muted-text"></div>
+    </div>
+    <div class="card">
+    <div class="box-label">event.code</div>
+      <div id="event-code"  class="med-text sm-box"></div>
+  </div>
+    </div>
+
+  <div class="credits">
+    <h5><a href="https://github.com/cameron-chromiak" target=" ">cameron-chromiak</a>, inspired by <a href="https://keycode.info/" target=" ">+</a></h5>
+  </div>
+</div>
+
+    <!-- creates table -->
+  <script src='table.js'></script>
+
+  <!-- Table Toggle/Main Toggle -->
+  <script>
+  let toggleBtn =  document.getElementById('table-toggle');
+  let main = document.querySelector('.main');
+  let tableContainer = document.querySelector('.table-container')
+  let flexContainer = document.querySelector('.table-flex-container')
+
+  toggleBtn.addEventListener('click', function(e){
+      e.preventDefault;
+      if(main.style.display == 'block'){
+          main.style.display = 'none';
+      }else{
+        main.style.display = 'block'
+      };
+      //table
+      if(tableContainer.style.display == 'none'){
+        tableContainer.style.display = 'block';
+        flexContainer.style.display = 'flex';
+        toggleBtn.innerHTML = 'Back';
+      }else{
+        tableContainer.style.display = 'none'
+        flexContainer.style.display = 'none'
+        toggleBtn.innerHTML = 'Table';
+      }
+  });
+
+  </script>
+
+  <script>
+    let numDiv = document.getElementById('num-div');
+    let eWhich = document.getElementById('event-which');
+    let eKey = document.getElementById('event-key');
+    let eCode = document.getElementById('event-code');
+
+
+
+    window.addEventListener('keydown', function(event){
+      eWhich.innerHTML = event.which
+      eCode.innerHTML = event.code
+      if (event.key == ' '){
+        eKey.innerHTML = 'Space Bar'
+        eKey.classList.add('muted-text')
+      }else if (event.key == 'Unidentified' || event.key =='Meta' ){
+        eKey.innerHTML = 'Unidentified'
+        eKey.classList.add('muted-text')
+      }else{
+        eKey.innerHTML = event.key
+        eKey.classList.remove('muted-text')
+      }
+
+    });
+
+  </script>
+
+
+</body>
+</html>
